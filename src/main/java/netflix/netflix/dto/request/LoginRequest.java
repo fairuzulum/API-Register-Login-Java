@@ -1,4 +1,4 @@
-package dto.request;
+package netflix.netflix.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

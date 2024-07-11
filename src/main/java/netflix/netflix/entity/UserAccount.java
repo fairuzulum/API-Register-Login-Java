@@ -1,6 +1,6 @@
-package entity;
+package netflix.netflix.entity;
 
-import constant.ConstantTable;
+import netflix.netflix.constant.ConstantTable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
