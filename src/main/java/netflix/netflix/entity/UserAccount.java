@@ -5,6 +5,11 @@ import netflix.netflix.constant.ConstantTable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,7 +18,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Builder
 @Entity
 @Table(name = ConstantTable.USER_ACCOUNT)
-public class UserAccount{
+public class UserAccount implements UserDetails{
     @Id
     @GeneratedValue(generator = "user-id")
     @GenericGenerator(name = "user-id", strategy = "netflix.netflix.utils.UserIdGenerator")
@@ -33,8 +38,28 @@ public class UserAccount{
     private String password;
 
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return UserDetails.super.isAccountNonExpired();
+    }
 
+    @Override
+    public boolean isAccountNonLocked() {
+        return UserDetails.super.isAccountNonLocked();
+    }
 
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return UserDetails.super.isCredentialsNonExpired();
+    }
 
+    @Override
+    public boolean isEnabled() {
+        return UserDetails.super.isEnabled();
+    }
 }

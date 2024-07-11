@@ -44,7 +44,7 @@ public class AuthServiceImpl implements AuthService {
 
     }
 
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(readOnly = true)
     @Override
     public LoginResponse login(LoginRequest request) {
         // 1. Daftar
