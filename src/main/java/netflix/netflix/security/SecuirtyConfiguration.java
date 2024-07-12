@@ -25,6 +25,7 @@ public class SecuirtyConfiguration {
                 .authorizeHttpRequests(req -> req
                         .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
                         .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/api/v1/account").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(

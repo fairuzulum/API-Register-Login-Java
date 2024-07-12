@@ -1,6 +1,8 @@
 package netflix.netflix.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import netflix.netflix.dto.request.UpdateAccountRequest;
+import netflix.netflix.dto.response.AccountResponse;
 import netflix.netflix.entity.UserAccount;
 import netflix.netflix.repository.UserAccountRepository;
 import netflix.netflix.service.UserService;
@@ -25,6 +27,24 @@ public class UserServiceImpl implements UserService {
         return userAccountRepository.findById(userId).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found")
         );
+    }
+
+    @Override
+    public AccountResponse updateAccount(UpdateAccountRequest updateAccountRequest) {
+        UserAccount update = UserAccount.builder()
+                .id(updateAccountRequest.getId())
+                .name(updateAccountRequest.getName())
+                .email(updateAccountRequest.getEmail())
+                .username(updateAccountRequest.getUsername())
+                .password(updateAccountRequest.getPassword())
+                .build();
+        userAccountRepository.saveAndFlush(update);
+
+        return  AccountResponse.builder()
+                .name(update.getName())
+                .email(update.getEmail())
+                .username(update.getUsername())
+                .build();
     }
 
     @Override
